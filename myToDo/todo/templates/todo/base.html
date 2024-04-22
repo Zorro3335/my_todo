@@ -1,0 +1,58 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>{% block title %} Главная страница {% endblock %}</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{% static 'todo/todo_style.css' %}">
+<link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200&display=swap" rel="stylesheet">
+    <!-- Yandex.Metrika counter -->
+    <script type="text/javascript" >
+       (function(m,e,t,r,i,k,a){m[i]=m[i]||function(){(m[i].a=m[i].a||[]).push(arguments)};
+       m[i].l=1*new Date();
+       for (var j = 0; j < document.scripts.length; j++) {if (document.scripts[j].src === r) { return; }}
+       k=e.createElement(t),a=e.getElementsByTagName(t)[0],k.async=1,k.src=r,a.parentNode.insertBefore(k,a)})
+       (window, document, "script", "https://mc.yandex.ru/metrika/tag.js", "ym");
+
+       ym(96038508, "init", {
+            clickmap:true,
+            trackLinks:true,
+            accurateTrackBounce:true,
+            webvisor:true
+       });
+    </script>
+<noscript><div><img src="https://mc.yandex.ru/watch/96038508" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
+<!-- /Yandex.Metrika counter -->
+</head>
+<body>
+    <nav class="navigation">
+        <img src="{% static 'todo/img/tick_21077.png' %}" alt="">
+        <p><a href="{% url 'home' %}">Заметки</a></p>
+        {% block nav %}
+        {% if user.is_authenticated%}
+            <ul>
+                <li><a href="{% url 'completed_todo' %}">Выполненные</a></li>
+                <li><a href="{% url 'current_todos' %}">Задачи</a></li>
+                <li><a href="{% url 'create_todo' %}">Создать</a></li>
+                <li><a href="{% url 'logout_user' %}">Выход</a></li>
+            </ul>
+
+        {% else %}
+            <ul>
+                <li><a href="{% url 'singupuser' %}">Зарегестрироваться</a></li>
+                <li><a href="{% url 'login_user' %}">Войти</a></li>
+            </ul>
+        {% endif %}
+        {% endblock %}
+    </nav>
+
+
+
+    {% block content %}
+
+    {% endblock %}
+</body>
+</html>
